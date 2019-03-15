@@ -65,10 +65,23 @@
 		<!-- Profile for generation and publishing of release JavaDoc documentation. 
 			Use: mvn -P releaseDocumentation site References: http://maven.apache.org/guides/introduction/introduction-to-profiles.html -->
 		<profile>
+			<id>sonar</id>
+			  <properties>
+			    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+			    <sonar.organization>akshayapk-github</sonar.organization>
+			  </properties>
 			<!-- Name of the Maven build profile. Used in project's Jenkins job configuration. -->
 			<id>releaseDocumentation</id>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+					      </plugin>
+					      <plugin>
+						<groupId>org.sonarsource.scanner.maven</groupId>
+						<artifactId>sonar-maven-plugin</artifactId>
+					 </plugin>
 					<!-- In preparation of site generation, extract the release version 
 						number to a maven property. Performed during pre-site phase. -->
 					<plugin>
